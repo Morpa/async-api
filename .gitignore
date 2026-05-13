@@ -25,8 +25,11 @@ go.work
 go.work.sum
 
 # env file
-.env
+.envrc
 
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Postgres data
+pgdata
