@@ -9,17 +9,20 @@ import (
 	"time"
 
 	"github.com/Morpa/async-api/config"
+	"github.com/Morpa/async-api/store"
 )
 
 type ApiServer struct {
 	config *config.Config
 	logger *slog.Logger
+	store  *store.Store
 }
 
-func New(config *config.Config, logger *slog.Logger) *ApiServer {
+func New(config *config.Config, logger *slog.Logger, store *store.Store) *ApiServer {
 	return &ApiServer{
 		config: config,
 		logger: logger,
+		store:  store,
 	}
 }
 
@@ -30,7 +33,8 @@ func (s *ApiServer) ping(w http.ResponseWriter, r *http.Request) {
 
 func (s *ApiServer) Start(ctx context.Context) error {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/ping", s.ping)
+	mux.HandleFunc("GET /ping", s.ping)
+	mux.HandleFunc("POST /auth/signup", s.signupHandler())
 
 	middleware := NewLoggerMiddleware(s.logger)
 	server := &http.Server{
