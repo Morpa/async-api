@@ -10,7 +10,10 @@ require (
 	golang.org/x/crypto v0.51.0
 )
 
-require github.com/golang-migrate/migrate/v4 v4.19.1
+require (
+	github.com/golang-jwt/jwt/v5 v5.3.1
+	github.com/golang-migrate/migrate/v4 v4.19.1
+)
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
