@@ -19,3 +19,17 @@ Content-Type: {{contentType}}
   "email": "{{email}}",
   "password": "{{password}}"
 }
+
+
+### Variable in request body
+@email = user@example.com
+@password = secret
+
+
+POST {{baseUrl}}/auth/signin
+Content-Type: {{contentType}}
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
