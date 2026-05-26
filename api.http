@@ -26,6 +26,7 @@ Content-Type: {{contentType}}
 
 > {%
   client.global.set("access_token", response.body.data.access_token);
+  client.global.set("refresh_token", response.body.data.refresh_token);
 %}
 
 ### Health check — usa o token capturado acima
@@ -35,15 +36,10 @@ Authorization: Bearer {{access_token}}
 
 
 
-### 1. Signin
-POST {{baseUrl}}/auth/signin
+### Refresh token
+POST {{baseUrl}}/auth/refresh
 Content-Type: {{contentType}}
 
 {
-  "email": "{{email}}",
-  "password": "{{password}}"
+  "refresh_token": "{{refresh_token}}"
 }
-
-> {%
-  client.global.set("access_token", response.body.data.access_token);
-%}
