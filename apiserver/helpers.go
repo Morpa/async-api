@@ -44,7 +44,7 @@ func handler(f func(w http.ResponseWriter, r *http.Request) error) http.HandlerF
 }
 
 func encode[T any](v T, status int, w http.ResponseWriter) error {
-	w.Header().Set("Content-Type", "aplication/json; charset=utf-8")
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
 	if err := json.NewEncoder(w).Encode(v); err != nil {
 		return fmt.Errorf("encoding response: %w", err)

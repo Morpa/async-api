@@ -2,16 +2,9 @@
 @baseUrl = http://{{host}}
 @contentType = application/json
 
-### health check
-GET {{baseUrl}}/ping
-Accept: {{contentType}}
-
-
-### Variable in request body
+### Signup
 @email = user@example.com
 @password = secret
-
-
 POST {{baseUrl}}/auth/signup
 Content-Type: {{contentType}}
 
@@ -20,12 +13,9 @@ Content-Type: {{contentType}}
   "password": "{{password}}"
 }
 
-
-### Variable in request body
+### Signin — captura o token
 @email = user@example.com
 @password = secret
-
-
 POST {{baseUrl}}/auth/signin
 Content-Type: {{contentType}}
 
@@ -33,3 +23,27 @@ Content-Type: {{contentType}}
   "email": "{{email}}",
   "password": "{{password}}"
 }
+
+> {%
+  client.global.set("access_token", response.body.data.access_token);
+%}
+
+### Health check — usa o token capturado acima
+GET {{baseUrl}}/ping
+Accept: {{contentType}}
+Authorization: Bearer {{access_token}}
+
+
+
+### 1. Signin
+POST {{baseUrl}}/auth/signin
+Content-Type: {{contentType}}
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+> {%
+  client.global.set("access_token", response.body.data.access_token);
+%}
