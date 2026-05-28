@@ -62,7 +62,7 @@ func TestReportStore(t *testing.T) {
 	require.Equal(t, report.OutputFilePath, &outputPath)
 	require.Equal(t, report.DownloadUrlExpiresAt.UnixNano(), (&downloadUrlExpiresAt).UnixNano())
 
-	report3, err := reportStore.ByPrimaryKey(ctx, report.UserId, report.Id.String())
+	report3, err := reportStore.ByPrimaryKey(ctx, report.UserId, report.Id)
 	require.NoError(t, err)
 	require.Equal(t, report.UserId, report3.UserId)
 	require.Equal(t, report.Id, report3.Id)

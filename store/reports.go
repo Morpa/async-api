@@ -69,7 +69,7 @@ func (s *ReportStore) Update(ctx context.Context, report *Report) (*Report, erro
 	return &updated, nil
 }
 
-func (s *ReportStore) ByPrimaryKey(ctx context.Context, userId uuid.UUID, id string) (*Report, error) {
+func (s *ReportStore) ByPrimaryKey(ctx context.Context, userId uuid.UUID, id uuid.UUID) (*Report, error) {
 	const query = `SELECT * FROM reports WHERE user_id = $1 AND id = $2`
 	var report Report
 	if err := s.db.GetContext(ctx, &report, query, userId, id); err != nil {
